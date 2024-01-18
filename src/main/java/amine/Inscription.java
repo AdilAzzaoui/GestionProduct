@@ -49,36 +49,31 @@ public class Inscription extends HttpServlet {
 
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		String url = "jdbc:mysql://localhost:3306/gestiondeprojet";
+		String url = "jdbc:mysql://localhost:3304/GestionProjet";
 		String user = "root";
 		String pass = "";
-		if ("Login".equals(request.getParameter("action"))) {
-		    String login = request.getParameter("login");
-		    String password = request.getParameter("password");
-		    
-		    try (Connection connection = DriverManager.getConnection(url, user, pass)) {
-		        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
-		        
-		        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-		            stmt.setString(1, login);
-		            stmt.setString(2, password);
-		            
-		            try (ResultSet result = stmt.executeQuery()) {
-		                if (result.next()) {
-		                    // Successful login
-		                    response.sendRedirect("/hello.jsp");
-		                } 
-		            }
-		        }
-		    } catch (SQLException e) {
-		        
-		    } catch (Exception e) {
-		        
-		    }
-		}
+		/*
+		 * if ("Login".equals(request.getParameter("action"))) { String login =
+		 * request.getParameter("login"); String password =
+		 * request.getParameter("password");
+		 * 
+		 * try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+		 * String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+		 * 
+		 * try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+		 * stmt.setString(1, login); stmt.setString(2, password);
+		 * 
+		 * try (ResultSet result = stmt.executeQuery()) { if (result.next()) { //
+		 * Successful login response.sendRedirect("/hello.jsp"); } } } } catch
+		 * (SQLException e) {
+		 * 
+		 * } catch (Exception e) {
+		 * 
+		 * } }
+		 */
 
 
-		if ("Inscription".equals(request.getParameter("action"))) {
+		
 			String nom = request.getParameter("name");
 			String prenom = request.getParameter("lsname");
 			String email = request.getParameter("email");
@@ -124,4 +119,4 @@ public class Inscription extends HttpServlet {
 		}
 	}
 
-}
+ 

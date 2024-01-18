@@ -109,10 +109,13 @@ body{
     <div class="login form">
       <header>Login</header>
       <form action="Login" method="post">
-        <input type="text" placeholder="Enter your email" name="login" required>
+        <input type="text" placeholder="Enter your username" name="login" <%if(request.getAttribute("login") != null){ %>value="<%=request.getAttribute("login")%>" <%} %>required>
         <input type="password" placeholder="Enter your password" name="password" required>
         <a href="#">Forgot password?</a>
         <input type="submit" class="button" value="Login">
+        <%if(request.getAttribute("ERROR") != null) {%> 
+        	<span style="color:red;"><%= request.getAttribute("ERROR") %></span>
+        <%} %>
       </form>
       <div class="signup">
         <span class="signup">Don't have an account?

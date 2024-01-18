@@ -1,9 +1,12 @@
 package amine;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,8 +41,8 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-		String url = "jdbc:mysql://localhost:3306/gestiondeprojet";
+		//doGet(request, response);
+		String url = "jdbc:mysql://localhost:3304/GestionProjet";
 		String user = "root";
 		String pass = "";
 		//if ("Login".equals(request.getParameter("action"))) {
@@ -56,12 +59,22 @@ public class Login extends HttpServlet {
 		            try (ResultSet result = stmt.executeQuery()) {
 		                if (result.next()) {
 		                    // Successful login
-		                	
-		                	response.sendRedirect(request.getContextPath() + "/hello.jsp");
+		                	HttpSession session = request.getSession();
+		                	session.setAttribute("login", login);
+		                	RequestDispatcher dispacher = request.getRequestDispatcher("Projects");
+		                	dispacher.forward(request, response);
 		                } 
 		                else {
-		                	
-		                }
+		                	try {
+		                	    String error = "Login or Password Incorrect!";
+		                	    request.setAttribute("ERROR", error);
+		                	    request.setAttribute("login", login);
+		                	    RequestDispatcher dispatcher = request.getRequestDispatcher("Authentification.jsp");
+		                	    dispatcher.forward(request, response);
+		                	} catch (ServletException | IOException e) {
+		                	    System.out.println(e.getMessage()); 
+		                	}
+
 		            }
 		        }
 		    } catch (SQLException e) {
@@ -71,6 +84,9 @@ public class Login extends HttpServlet {
 		    }
 		//}
 
+		    } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
-
-}

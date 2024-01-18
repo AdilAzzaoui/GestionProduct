@@ -1,36 +1,41 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="db.Tache" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <title>Add Project</title>
-  <style>
+    <title>Update Task</title>
+    <style>
         body {
-            padding-top: 56px; /* Ajuster la marge supérieure pour compenser la barre de navigation fixe */
-            background: linear-gradient(135deg, #3494e6, #ec6ead); /* Dégradé de couleurs */
-            background-size: cover;
-            color: #fff;
+            background-color: rgb(230, 230, 230); /* Couleur de fond RGB */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .container {
-            margin-top: 50px;
+        nav {
+            background-color: #343a40; /* Couleur de fond de la barre de navigation */
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important; /* Couleur du texte de la barre de navigation */
         }
 
         form {
-            max-width: 400px;
-            margin: auto;
-            background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond du formulaire (blanc semi-transparent) */
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        input[type="text"] {
+        textarea, input[type="date"], input[type="submit"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -42,7 +47,6 @@
         input[type="submit"] {
             background-color: #007bff;
             color: #fff;
-            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -51,16 +55,13 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
-            label {
-        color: #000; /* Couleur du texte des labels */
-    }
-        
     </style>
-    </head>
+</head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="Projects">Votre Logo</a>
+<% if(!request.getAttribute("tache").equals(null)) {%>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="Projects">Votre Logo</a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -82,24 +83,28 @@
             </li>
         </ul>
     </div>
-</nav>
-
-<div class="container">
-    <form action="AddProject" method="post">
-        <div class="form-group">
-            <label for="libelle">Libellé :</label>
-            <input type="text" class="form-control" name="libelle" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description :</label>
-            <input type="text" class="form-control" name="description" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Ajouter Projet</button>
-    </form>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </nav>
+    <br><br><br>
+    <div class="container">
+        <% Tache tache = (Tache)request.getAttribute("tache"); %>
+        <form action="ModifierTache" method="post">
+            <input type="hidden" name="idTache" value="<%=tache.getId()%>">
+            <div class="form-group">
+                <label for="description">Description :</label>
+                <textarea class="form-control" name="description"><%=tache.getDescription()%></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dateDebut">Date Debut :</label>
+                <input class="form-control" type="date" name="dateDebut" value="<%=tache.getDateDebut()%>">
+            </div>
+            <div class="form-group">
+                <label for="dateFin">Date Fin :</label>
+                <input class="form-control" type="date" name="dateFin" value="<%=tache.getDateFin()%>">
+            </div>
+            <button class="btn btn-primary" type="submit">Modifier la tache</button>
+        </form>
+    </div>
+<%} %>
 
 </body>
 </html>

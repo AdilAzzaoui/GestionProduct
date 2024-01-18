@@ -25,6 +25,18 @@
 
 <title>Project Dashboard</title>
 <style>
+    caption {
+        border: 1px solid #ccc; /* Ajouter une bordure */
+        caption-side: top; /* Positionner la légende au-dessus du tableau */
+        text-align: center; /* Centrer le texte à l'intérieur de la légende */
+        font-size: 1.5em;
+        font-weight: bold;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
 .status-todo {
 	background-color: red;
 }
@@ -83,15 +95,41 @@ th {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
+
 	<% if(request.getAttribute("projets") != null) { %>
 	<% ArrayList<Projets> projets = (ArrayList<Projets>)request.getAttribute("projets"); %>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="Projects">Votre Logo</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="Projects"><i class="fas fa-home"></i> Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=""><i class="fas fa-user"></i> Hello <%= session.getAttribute("login") %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="AddProject"><i class="fas fa-plus"></i> Ajouter Projet</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+	<br><br><br>
 	<table>
+		<caption>Liste des Projets</caption>
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Libellé du Projet</th>
 				<th>Description du Projet</th>
-				<th>ID de l'Utilisateur</th>
 				<th>Tâches</th>
 			</tr>
 		</thead>
@@ -101,7 +139,6 @@ th {
 				<td><%= p.getId() %></td>
 				<td><%= p.getLibelle() %></td>
 				<td><%= p.getDescription() %></td>
-				<td><%= p.getIdUser() %></td>
 				<td>
 					<ul class="task-list">
 						<% List<Tache> taches = p.getTaches(); %>
@@ -138,8 +175,9 @@ th {
 			</tr>
 			<% } %>
 		</tbody>
-		<a href="AddProject.jsp">Ajouter projet</a>
 	</table>
+			<a href="AddProject.jsp">Ajouter projet</a>
+	
 	<%} %>
 
 	<script>
@@ -162,6 +200,7 @@ th {
 	    }
 
 		$(document).ready(
+				
 				function() {
 					$(document).on(
 							'change',

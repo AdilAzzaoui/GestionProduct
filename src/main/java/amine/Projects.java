@@ -52,6 +52,12 @@ public class Projects extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		HttpSession session = request.getSession();
+		if(session == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Authentification.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
 		String login = (String) session.getAttribute("login");
 		Connection conn = DataBase.getConnection();
 		if(conn != null) {

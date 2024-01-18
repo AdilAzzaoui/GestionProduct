@@ -37,15 +37,29 @@ public class AddProject extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		if(session == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Authentification.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AddProject.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if(session == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Authentification.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
 		String libelle = request.getParameter("libelle");
 		String description = request.getParameter("description");
-		HttpSession session = request.getSession();
 		Connection conn = DataBase.getConnection();
 		if(conn != null) {
 			try {

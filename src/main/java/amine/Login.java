@@ -34,6 +34,14 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		if(session == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Logout");
+			dispatcher.forward(request, response);
+			return;
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Authentification.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

@@ -89,4 +89,24 @@
     <servlet-name>AddTache</servlet-name>
     <url-pattern>/AddTache</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModifierTache</display-name>
+    <servlet-name>ModifierTache</servlet-name>
+    <servlet-class>amine.ModifierTache</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierTache</servlet-name>
+    <url-pattern>/ModifierTache</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>amine.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
 </web-app>

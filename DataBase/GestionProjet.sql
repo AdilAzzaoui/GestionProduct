@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : lun. 15 jan. 2024 à 08:58
+-- Hôte : localhost
+-- Généré le : ven. 19 jan. 2024 à 00:35
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `gestiondeprojet`
+-- Base de données : `GestionProjet`
 --
 
 -- --------------------------------------------------------
@@ -30,8 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `projet` (
   `id_projet` int(11) NOT NULL,
   `libelle` varchar(100) NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `idUser` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `projet`
+--
+
+INSERT INTO `projet` (`id_projet`, `libelle`, `description`, `idUser`) VALUES
+(1, 'azerty', 'aaaaaa', 'adil123'),
+(2, 'zzzz', 'eeeee', 'adil123'),
+(3, 'aaa', 'aaa', 'adil123'),
+(4, 'azery', 'ssissisiis', 'adil123');
 
 -- --------------------------------------------------------
 
@@ -47,6 +58,15 @@ CREATE TABLE `tache` (
   `date_fin` date NOT NULL,
   `etat` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `tache`
+--
+
+INSERT INTO `tache` (`id_tache`, `id_projet`, `description`, `date_debut`, `date_fin`, `etat`) VALUES
+(8, 1, 'azertyuuaoauaaaa', '2024-01-01', '2024-01-01', 'Done'),
+(9, 1, 'sisgsig', '2024-01-01', '2024-01-03', 'Doing'),
+(11, 2, 'oonononon', '2024-01-10', '2024-01-18', 'Doing');
 
 -- --------------------------------------------------------
 
@@ -81,7 +101,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`username`, `nom`, `prenom`, `email`, `password`, `role`) VALUES
 ('adil123', 'Azzaoui', 'Adil', 'adil@adil.com', 'adil123', 'user'),
 ('amine123', 'Amine', 'El Ouadi', 'amin@amine.com', 'amin123', 'user'),
-('imadmouhib', 'mouhib', 'imad', 'imad@mouhib.com', '123', 'user');
+('fati', 'amezian', 'fati', 'aa@aa.com', 'fati', 'user'),
+('samira', 'Azdad', 'samira', 'samira@sa.com', 'samira', 'user');
 
 --
 -- Index pour les tables déchargées
@@ -91,7 +112,8 @@ INSERT INTO `user` (`username`, `nom`, `prenom`, `email`, `password`, `role`) VA
 -- Index pour la table `projet`
 --
 ALTER TABLE `projet`
-  ADD PRIMARY KEY (`id_projet`);
+  ADD PRIMARY KEY (`id_projet`),
+  ADD KEY `idUser` (`idUser`);
 
 --
 -- Index pour la table `tache`
@@ -121,17 +143,23 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `projet`
 --
 ALTER TABLE `projet`
-  MODIFY `id_projet` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_projet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `tache`
 --
 ALTER TABLE `tache`
-  MODIFY `id_tache` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tache` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `projet`
+--
+ALTER TABLE `projet`
+  ADD CONSTRAINT `projet_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`username`);
 
 --
 -- Contraintes pour la table `tache`

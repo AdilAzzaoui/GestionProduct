@@ -109,4 +109,14 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteProject</display-name>
+    <servlet-name>DeleteProject</servlet-name>
+    <servlet-class>amine.DeleteProject</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProject</servlet-name>
+    <url-pattern>/DeleteProject</url-pattern>
+  </servlet-mapping>
 </web-app>

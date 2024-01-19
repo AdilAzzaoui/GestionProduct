@@ -40,6 +40,9 @@ caption {
 	margin-bottom: 10px;
 	border-radius: 5px;
 }
+ .bg-lightblue {
+        background-color: #D3D3D3; /* Light gray color */
+    }
 
 .status-todo {
 	background-color: red;
@@ -106,8 +109,9 @@ th {
 	<%
 	ArrayList<Projets> projets = (ArrayList<Projets>) request.getAttribute("projets");
 	%>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="Projects">Votre Logo</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-lightblue fixed-top">
+		<a class="navbar-brand" href="Projects">        <img src="ehei.png" alt="Logo Ehei" height="30" class="d-inline-block align-top">
+		</a>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
@@ -186,8 +190,7 @@ th {
 						</select> <a
 							href="<%="ModifierTache?id=" + URLEncoder.encode(String.valueOf(tache.getId()), "UTF-8")%>">
 								<i class="fas fa-edit"></i> <!-- Icône de modification -->
-						</a> <a
-							href="<%="SupprimerTache?id=" + URLEncoder.encode(String.valueOf(tache.getId()), "UTF-8")%>">
+						</a> <a href="javascript:void(0);" onclick="confirmDeleteTask('<%=tache.getId()%>')">
 								<i class="fas fa-trash"></i> <!-- Icône de suppression -->
 						</a>
 						</li>
@@ -197,7 +200,7 @@ th {
 					</ul> <a href="AddTache.jsp?idProject=<%=p.getId()%>">Ajouter
 						Tache</a>
 				</td>
-				<td><a href="DeleteProject?id=<%=p.getId()%>">
+				<td> <a href="javascript:void(0);" onclick="confirmDelete('<%=p.getId()%>')">
 					<i class="fas fa-trash"></i> <!-- Icône de suppression -->
 				</a></td>
 			</tr>
@@ -213,6 +216,18 @@ th {
 	%>
 
 	<script>
+	 function confirmDelete(projectId) {
+	        var confirmDelete = confirm("Are you sure you want to delete this project?");
+	        if (confirmDelete) {
+	            window.location.href = "DeleteProject?id=" + projectId;
+	        }
+	    }
+	 function confirmDeleteTask(taskId) {
+	        var confirmDelete = confirm("Are you sure you want to delete this task?");
+	        if (confirmDelete) {
+	            window.location.href = "SupprimerTache?id=" + taskId;
+	        }
+	    }
 		function getTaskStatusClass(status) {
 			var statusClass = "";
 			switch (status) {

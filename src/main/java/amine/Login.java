@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		String url = "jdbc:mysql://localhost:3306/gestiondeprojet";
+		String url = "jdbc:mysql://localhost:3304/GestionProjet";
 		String user = "root";
 		String pass = "";
 		//if ("Login".equals(request.getParameter("action"))) {

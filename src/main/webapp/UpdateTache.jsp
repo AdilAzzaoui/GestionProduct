@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
         }
+                 .bg-lightblue {
+        background-color: #D3D3D3; /* Light gray color */
+    }
+        
 
         nav {
             background-color: #343a40; /* Couleur de fond de la barre de navigation */
@@ -60,8 +64,8 @@
 <body>
 
 <% if(!request.getAttribute("tache").equals(null)) {%>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="Projects">Votre Logo</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-lightblue fixed-top">
+            <a class="navbar-brand" href="Projects"> <img alt="Logo" src="ehei.png"  height="30" class="d-inline-block align-top"> </i></a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

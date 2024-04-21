@@ -1,4 +1,4 @@
-package amine;
+package project;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

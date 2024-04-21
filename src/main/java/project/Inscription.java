@@ -1,4 +1,4 @@
-package amine;
+package project;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
